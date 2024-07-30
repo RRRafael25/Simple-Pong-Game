@@ -43,6 +43,10 @@ pen.hideturtle()
 pen.goto(0,260)
 pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
 
+#Paddle border
+
+
+
 #functions for the game
 def paddle_up(paddle):
     y = paddle.ycor()
@@ -52,12 +56,24 @@ def paddle_down(paddle):
     y = paddle.ycor()
     y -= 20
     paddle.sety(y)
+    
+def border_up(paddle):
+    y = paddle.ycor()
+    if y < 245:
+        paddle_up(paddle)
+def border_down(paddle):
+    y = paddle.ycor()
+    if y > -240:
+        paddle_down(paddle)
 #Keyboard binding
 wn.listen()
-wn.onkeypress(lambda: paddle_up(paddle_a), "w")
-wn.onkeypress(lambda: paddle_up(paddle_b), "Up")
-wn.onkeypress(lambda: paddle_down(paddle_a), "s")
-wn.onkeypress(lambda: paddle_down(paddle_b), "Down")
+wn.onkeypress(lambda: border_up(paddle_a), "w")
+
+
+wn.onkeypress(lambda: border_up(paddle_b), "Up")
+
+wn.onkeypress(lambda: border_down(paddle_a), "s")
+wn.onkeypress(lambda: border_down(paddle_b), "Down")
 #Main game loop
 while True:
     wn.update() 
